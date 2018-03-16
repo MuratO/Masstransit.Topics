@@ -11,13 +11,14 @@ namespace Producer
         {
             return Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
+
                 //cfg.Send<ISampleRequest>(x => x.UseRoutingKeyFormatter(c => c.Message.RoutingKey));
                 cfg.Publish<ISampleRequest>(x =>
                 {
                     x.ExchangeType = ExchangeType.Topic;
                     //  x.SetExchangeArgument("ExchangeName","message.queue");
                 });
-                
+                 
                 cfg.Host(RabbitMqConstants.Uri.Uri, hst =>
                 {
                     hst.Username(RabbitMqConstants.Username);
