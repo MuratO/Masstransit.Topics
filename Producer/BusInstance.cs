@@ -1,6 +1,7 @@
 ﻿using Common.Helpers;
 using Common.Interfaces;
 using MassTransit;
+using RabbitMQ.Client;
 
 namespace Producer
 {
@@ -10,18 +11,13 @@ namespace Producer
         {
             return Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
-                /*
-                if you want publish message, use this configuration
-                
-                cfg.Host(RabbitMqConstants.Uri.Uri, hst =>
+                //cfg.Send<ISampleRequest>(x => x.UseRoutingKeyFormatter(c => c.Message.RoutingKey));
+                cfg.Publish<ISampleRequest>(x =>
                 {
-                    hst.Username(RabbitMqConstants.Username);
-                    hst.Password(RabbitMqConstants.Password);
+                    x.ExchangeType = ExchangeType.Topic;
+                    //  x.SetExchangeArgument("ExchangeName","message.queue");
                 });
-
-                */
-                cfg.Send<ISampleRequest>(x => x.UseRoutingKeyFormatter(c => c.Message.RoutingKey));
-
+                
                 cfg.Host(RabbitMqConstants.Uri.Uri, hst =>
                 {
                     hst.Username(RabbitMqConstants.Username);

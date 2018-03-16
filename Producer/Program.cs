@@ -17,7 +17,8 @@ namespace Producer
                 var menu = new EasyConsole.Menu()
                     .Add("Send Message Earth and Mars", MarsMessage)
                     .Add("Send Message Earth and Saturn", SaturnMessage)
-                    .Add("Publish Simple Message", SimpleMessage);
+                    //.Add("Publish Simple Message", SimpleMessage)
+                    ;
 
                 menu.Display();
                 
@@ -31,11 +32,11 @@ namespace Producer
             var message =  new SampleRequest()
             {
                 Request = "Hello From World !",
-                RoutingKey = "EARTH,MARS",
+                RoutingKey = "EARTH.MARS",
                 Timestamp = DateTime.Now
             };
 
-            publisher.Send(message);
+            publisher.Publish(message);
         }
 
         private static void SaturnMessage()
@@ -43,11 +44,11 @@ namespace Producer
             var message =  new SampleRequest()
             {
                 Request = "Hello From World !",
-                RoutingKey = "EARTH,SATURN",
+                RoutingKey = "EARTH.SATURN",
                 Timestamp = DateTime.Now
             };
 
-            publisher.Send(message);
+            publisher.Publish(message);
         }
 
 

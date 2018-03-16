@@ -22,7 +22,7 @@ namespace Producer
             try
             {
                 _endpoint = await _busControl.GetSendEndpoint(RabbitMqConstants.MessageExchangeUri.Uri);
-                await _endpoint.Send<ISampleRequest>(message);
+                await _endpoint.Send<ISampleRequest>(message,x=>x.SetRoutingKey(message.RoutingKey));
             }
             catch (Exception e)
             {
@@ -33,11 +33,15 @@ namespace Producer
             }
         }
 
-        public void Publish(ISampleRequest message)
+        public async Task Publish(ISampleRequest message)
         {
             try
             {
-                _busControl.Publish<ISampleRequest>(message);
+                await _busControl.Publish<ISampleRequest>(message, x =>
+                {
+                    x.SetRoutingKey(message.RoutingKey);
+                    x.DestinationAddress = RabbitMqConstants.MessageExchangeUri.Uri;
+                });
             }
             catch (Exception e)
             {

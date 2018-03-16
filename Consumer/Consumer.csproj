@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EasyConsole, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EasyConsole.1.1.0\lib\net452\EasyConsole.dll</HintPath>
+    </Reference>
     <Reference Include="GreenPipes, Version=1.2.1.98, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
       <HintPath>..\packages\GreenPipes.1.2.1\lib\net452\GreenPipes.dll</HintPath>
     </Reference>
@@ -80,9 +83,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusInstance.cs" />
+    <Compile Include="EarthRequestConsumer.cs" />
+    <Compile Include="RequestFaultConsumer.cs" />
+    <Compile Include="MarsRequestConsumer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleRequestConsumer.cs" />
+    <Compile Include="SaturnRequestConsumer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
